@@ -75,3 +75,22 @@ a:hover {
   color: #f0c9d1; /* warna sedikit lebih terang saat hover */
   text-decoration: underline;
 }
+nav a {
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  background-color: #2e2e2e;
+  margin: 0 0.5rem;
+  font-weight: bold;
+}
+
+nav a:hover {
+  background-color: #444;
+}
+body {
+  background-color: #1c1c1e;
+  color: #e8d8c4;
+  font-family: 'Georgia', serif;
+  line-height: 1.7;
+  margin: 0;
+  padding: 0;
+}
