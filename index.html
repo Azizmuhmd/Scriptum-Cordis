@@ -39,5 +39,41 @@
     <footer>
         <p>© 2025 Scriptum Cordis, Solum Caelis — Written by <em>Lumen Obscura</em></p>
     </footer>
+    <audio id="player" autoplay hidden></audio>
+
+<script>
+  const playlist = [
+    "lagu1.mp3", "lagu2.mp3", "lagu3.mp3", "lagu4.mp3",
+    "lagu5.mp3", "lagu6.mp3", "lagu7.mp3", "lagu8.mp3",
+    "lagu9.mp3", "lagu10.mp3", "lagu11.mp3", "lagu12.mp3"
+  ];
+
+  // Fungsi untuk mengacak playlist
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
+  const player = document.getElementById("player");
+  let shuffled = shuffle([...playlist]);
+  let current = 0;
+
+  function playNext() {
+    player.src = shuffled[current];
+    player.volume = 0.25; // Lembut dan tidak mengganggu
+    player.play().catch(() => {}); // Tangani autoplay error (HP)
+  }
+
+  player.addEventListener("ended", () => {
+    current = (current + 1) % shuffled.length;
+    playNext();
+  });
+
+  playNext();
+</script>
+
 </body>
 </html>
