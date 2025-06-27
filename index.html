@@ -40,7 +40,7 @@
         <p>© 2025 Scriptum Cordis, Solum Caelis — Written by <em>Lumen Obscura</em></p>
     </footer>
 
-   <!-- Pemutar Musik -->
+    <!-- Pemutar Musik -->
 <audio id="player" autoplay hidden></audio>
 
 <!-- Kontrol Volume -->
@@ -52,9 +52,18 @@
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const playlist = [
-      "Take You There X No BS.mp3", "Love You Too Much.mp3", "Skip This Part.mp3", "Unmistakable.mp3",
-      "I Have Nothing.mp3", "On My Way.mp3", "Rahasia Hati.mp3", "Cool Enough For You.mp3",
-      "Saturn X Slow Dancing.mp3", "Make You Mine.mp3", "Love Me.mp3", "Limbo.mp3"
+      "take_you_there_x_no_bs.mp3",
+      "love_you_too_much.mp3",
+      "skip_this_part.mp3",
+      "unmistakable.mp3",
+      "i_have_nothing.mp3",
+      "on_my_way.mp3",
+      "rahasia_hati.mp3",
+      "cool_enough_for_you.mp3",
+      "saturn_x_slow_dancing.mp3",
+      "make_you_mine.mp3",
+      "love_me.mp3",
+      "limbo.mp3"
     ];
 
     function shuffle(array) {
@@ -72,11 +81,18 @@
     let shuffled = shuffle([...playlist]);
     let current = 0;
 
+    function formatTrackName(filename) {
+      return filename
+        .replace(".mp3", "")
+        .replace(/_/g, " ")
+        .replace(/\b\w/g, l => l.toUpperCase()); // Kapitalisasi setiap kata
+    }
+
     function playNext() {
       const track = shuffled[current];
       player.src = track;
-      player.volume = 0.25;
-      nowPlaying.textContent = "Now Playing: " + track.replace(".mp3","");
+      player.volume = 0.15;
+      nowPlaying.textContent = "Now Playing: " + formatTrackName(track);
       console.log("Menyetel lagu:", track);
       player.play().catch(err => {
         console.log("Gagal autoplay:", err);
@@ -104,7 +120,6 @@
     playNext();
   });
 </script>
-
-
+   
 </body>
 </html>
