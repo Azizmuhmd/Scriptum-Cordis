@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Di Antara Luka yang Tak Bertepuk</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
@@ -19,8 +19,10 @@
     <a href="archive.html">Archive</a>
     <a href="about.html">About</a>
   </nav>
-  
+
   <main style="max-width: 700px; margin: auto; padding: 2rem; line-height: 1.8;">
+    <!-- Puisi -->
+    <!-- (Puisi tidak disingkat, langsung tulis ulang seluruh bagian puisi dari file sebelumnya) -->
     <p>Aku bersalah.<br>
     Itu tak perlu kau ulang.<br>
     Dadaku sudah lebih dulu mengakuinya,<br>
@@ -44,7 +46,7 @@
     Bukan dari usaha yang kubayar dengan air mata dan sepi?<br>
     Mengapa kesalahanku jadi senjata yang kau simpan?<br>
     untuk digunakan setiap kali kau tak ingin melihatku,<br>
-      menyentuhku, menggenggamku, memelukku?</p>
+    menyentuhku, menggenggamku, memelukku?</p>
 
     <p>Aku hanya ingin dimengerti, bukan dibenarkan.<br>
     Dipeluk, bukan dijatuhi dakwaan.</p>
@@ -114,88 +116,132 @@
     tapi saling memeluk walau sama sama pecah.</p>
   </main>
 
+  <section style="max-width: 700px; margin: 3rem auto; padding: 0 1rem;">
+    <h3 style="margin-bottom: 0.5rem;">Tinggalkan Pesan Anonim</h3>
+    <textarea id="comment-input" rows="4" style="width: 100%; padding: 1rem; border-radius: 10px; border: 1px solid #ccc;" placeholder="Tulis komentarmu di sini..."></textarea>
+    <button onclick="submitComment()" style="margin-top: 0.5rem; padding: 0.5rem 1rem; background-color: #333; color: white; border: none; border-radius: 5px;">Kirim</button>
+    <ul id="comment-list" style="list-style: none; padding-left: 0; margin-top: 2rem;"></ul>
+  </section>
+
   <footer style="text-align: center; padding: 2rem 0;">
     <p>© 2025 Scriptum Cordis — Written by <em>Lumen Obscura</em></p>
   </footer>
-    <!-- Pemutar Musik -->
-<audio id="player" autoplay hidden></audio>
 
-<!-- Kontrol Volume -->
-<div id="music-controls">
-  <button id="toggle-mute">🔊</button>
-  <span id="now-playing"></span>
-</div>
+  <audio id="player" autoplay hidden></audio>
+  <div id="music-controls">
+    <button id="toggle-mute">🔊</button>
+    <span id="now-playing"></span>
+  </div>
 
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const playlist = [
-      "take_you_there_x_no_bs.mp3",
-      "love_you_too_much.mp3",
-      "skip_this_part.mp3",
-      "unmistakable.mp3",
-      "i_have_nothing.mp3",
-      "on_my_way.mp3",
-      "rahasia_hati.mp3",
-      "cool_enough_for_you.mp3",
-      "saturn_x_slow_dancing.mp3",
-      "make_you_mine.mp3",
-      "love_me.mp3",
-      "limbo.mp3"
-    ];
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const playlist = [
+        "take_you_there_x_no_bs.mp3",
+        "love_you_too_much.mp3",
+        "skip_this_part.mp3",
+        "unmistakable.mp3",
+        "i_have_nothing.mp3",
+        "on_my_way.mp3",
+        "rahasia_hati.mp3",
+        "cool_enough_for_you.mp3",
+        "saturn_x_slow_dancing.mp3",
+        "make_you_mine.mp3",
+        "love_me.mp3",
+        "limbo.mp3"
+      ];
 
-    function shuffle(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
+      function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
       }
-      return array;
-    }
 
-    const player = document.getElementById("player");
-    const nowPlaying = document.getElementById("now-playing");
-    const toggleMute = document.getElementById("toggle-mute");
+      const player = document.getElementById("player");
+      const nowPlaying = document.getElementById("now-playing");
+      const toggleMute = document.getElementById("toggle-mute");
 
-    let shuffled = shuffle([...playlist]);
-    let current = 0;
+      let shuffled = shuffle([...playlist]);
+      let current = 0;
 
-    function formatTrackName(filename) {
-      return filename
-        .replace(".mp3", "")
-        .replace(/_/g, " ")
-        .replace(/\b\w/g, l => l.toUpperCase()); // Kapitalisasi setiap kata
-    }
+      function formatTrackName(filename) {
+        return filename.replace(".mp3", "").replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase());
+      }
 
-    function playNext() {
-      const track = shuffled[current];
-      player.src = track;
-      player.volume = 0.25;
-      nowPlaying.textContent = "Now Playing: " + formatTrackName(track);
-      console.log("Menyetel lagu:", track);
-      player.play().catch(err => {
-        console.log("Gagal autoplay:", err);
+      function playNext() {
+        const track = shuffled[current];
+        player.src = track;
+        player.volume = 0.25;
+        nowPlaying.textContent = "Now Playing: " + formatTrackName(track);
+        player.play().catch(err => console.log("Gagal autoplay:", err));
+      }
+
+      player.addEventListener("ended", () => {
+        current = (current + 1) % shuffled.length;
+        playNext();
       });
-    }
 
-    player.addEventListener("ended", () => {
-      current = (current + 1) % shuffled.length;
+      toggleMute.addEventListener("click", () => {
+        player.muted = !player.muted;
+        toggleMute.textContent = player.muted ? "🔇" : "🔊";
+      });
+
+      document.body.addEventListener("click", function firstClick() {
+        player.play().catch(() => {});
+        document.body.removeEventListener("click", firstClick);
+      });
+
       playNext();
     });
+  </script>
 
-    toggleMute.addEventListener("click", () => {
-      player.muted = !player.muted;
-      toggleMute.textContent = player.muted ? "🔇" : "🔊";
-    });
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-    // Fix autoplay di HP: mulai setelah interaksi
-    function firstInteraction() {
-      player.play().catch(() => {});
-      document.body.removeEventListener("click", firstInteraction);
+    const firebaseConfig = {
+      apiKey: "AIzaSyBHqo9Zel_GOYdhw8GVphn-lfpSOO4KtYY",
+      authDomain: "scriptum-cordis-comments.firebaseapp.com",
+      databaseURL: "https://scriptum-cordis-comments-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "scriptum-cordis-comments",
+      storageBucket: "scriptum-cordis-comments.appspot.com",
+      messagingSenderId: "285720317062",
+      appId: "1:285720317062:web:8dcfe1c17d60685aee1507"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const commentsRef = ref(db, "comments_karya2");
+
+    function escapeHTML(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
     }
-    document.body.addEventListener("click", firstInteraction);
 
-    // Mulai sekali
-    playNext();
-  });
-</script>
+    window.submitComment = function () {
+      const comment = document.getElementById("comment-input").value.trim();
+      if (comment === "" || comment.length < 3 || comment.length > 500) return;
+
+      const now = new Date();
+      const time = now.toLocaleTimeString('id-ID', { hour12: false });
+      const date = now.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+      push(commentsRef, {
+        text: escapeHTML(comment),
+        timestamp: `${time} — ${date}`
+      });
+
+      document.getElementById("comment-input").value = "";
+    };
+
+    const list = document.getElementById("comment-list");
+    onChildAdded(commentsRef, (data) => {
+      const item = document.createElement("li");
+      item.innerHTML = `<strong>${data.val().timestamp}</strong><br>${data.val().text}`;
+      list.prepend(item);
+    });
+  </script>
 </body>
 </html>
