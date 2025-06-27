@@ -7,15 +7,13 @@
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
-  
+
   <!-- Stylesheet -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <!-- Logo dengan animasi -->
     <img src="58cce829-a320-4a6b-9232-501619d06593.png" alt="Logo Bunga Lily" class="logo-lily" />
-
     <h1>Scriptum Cordis, Solum Caelis</h1>
     <p class="tagline">Ditulis oleh rasa, mengalun pada angkasa, dan menetap dalam pelukan semesta.</p>
   </header>
@@ -39,6 +37,14 @@
         Karena jiwaku terlalu penuh, untuk memikul sunyi yang terlalu riuh.
       </p>
     </article>
+
+    <!-- Komentar Anonim -->
+    <section id="comments-section">
+      <h3>Leave a Secret Message</h3>
+      <textarea id="comment-input" placeholder="Write something..." rows="4" style="width: 100%;"></textarea>
+      <button onclick="submitComment()">Send</button>
+      <div id="comments-display" style="margin-top: 2rem;"></div>
+    </section>
   </main>
 
   <footer>
@@ -52,6 +58,60 @@
     <span id="now-playing"></span>
   </div>
 
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBHqo9Zel_GOYdhw8GVphn-lfpSOO4KtYY",
+      authDomain: "scriptum-cordis-comments.firebaseapp.com",
+      databaseURL: "https://scriptum-cordis-comments-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "scriptum-cordis-comments",
+      storageBucket: "scriptum-cordis-comments.appspot.com",
+      messagingSenderId: "285720317062",
+      appId: "1:285720317062:web:8dcfe1c17d60685aee1507",
+      measurementId: "G-JYTFD0G2V5"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    function submitComment() {
+      const text = document.getElementById("comment-input").value.trim();
+      if (!text) return;
+      const now = new Date();
+      const timestamp = now.toLocaleString('en-GB') + ":" + now.getSeconds();
+
+      db.ref("comments").push({
+        message: text,
+        time: timestamp
+      });
+      document.getElementById("comment-input").value = "";
+    }
+
+    function displayComments() {
+      const container = document.getElementById("comments-display");
+      db.ref("comments").on("value", (snapshot) => {
+        container.innerHTML = "";
+        const data = snapshot.val();
+        if (data) {
+          const keys = Object.keys(data).reverse(); // terbaru dulu
+          keys.forEach(key => {
+            const c = data[key];
+            const p = document.createElement("p");
+            p.textContent = `"${c.message}" — ${c.time}`;
+            p.style.borderBottom = "1px dashed #888";
+            p.style.padding = "0.5rem 0";
+            container.appendChild(p);
+          });
+        }
+      });
+    }
+
+    displayComments();
+  </script>
+
+  <!-- Musik -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const playlist = [
