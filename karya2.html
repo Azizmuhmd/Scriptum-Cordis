@@ -20,11 +20,19 @@
       backdrop-filter: blur(4px);
       border-radius: 12px;
     }
+    #stars-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+    }
   </style>
 </head>
 <body>
   <!-- Falling Stars Canvas -->
-  <canvas id="stars-canvas" style="position: fixed; top: 0; left: 0; z-index: 0;"></canvas>
+  <canvas id="stars-canvas"></canvas>
 
   <header>
     <img src="58cce829-a320-4a6b-9232-501619d06593.png" alt="Logo Bunga Lily" style="width: 120px; display: block; margin: 0 auto 1rem auto;" />
@@ -40,7 +48,7 @@
   </nav>
 
   <main style="max-width: 700px; margin: auto; padding: 2rem; line-height: 1.8;">
-    <!-- Puisi -->
+    <!-- Isi Puisi -->
     <p>Aku bersalah.<br>Itu tak perlu kau ulang.<br>Dadaku sudah lebih dulu mengakuinya,<br>bahkan sebelum mulutmu melontarkannya.</p>
     <p>Aku tahu,<br>aku telah mengecewakanmu.<br>Membuat retak di dinding yang kita bangun bersama.<br>Tapi sejak saat itu,<br>aku berusaha mencabut duri duri dari langkahku.<br>Menjahit ulang caraku mencintai, mengiris bagian buruk dari diriku,<br>demi sesuatu yang bisa kau peluk kembali, tanpa ragu.</p>
     <p>Aku bukan hanya meminta maaf.<br>Aku berusaha berubah. Mati-matian.<br>Sendirian. Dalam diam.<br>Tanpa panggung.</p>
@@ -61,7 +69,7 @@
     <p id="time-spent-display" style="margin-top: 2rem; font-style: italic; color: #aaa;"></p>
   </main>
 
-  <!-- Komentar Anonim -->
+  <!-- Komentar -->
   <section style="max-width: 700px; margin: 3rem auto; padding: 0 1rem;">
     <h3>Leave an Anonymous Message</h3>
     <textarea id="comment-input" rows="4" style="width: 100%; padding: 1rem; border-radius: 10px; border: 1px solid #ccc;" placeholder="Write your comment here..."></textarea>
@@ -72,149 +80,6 @@
   <footer style="text-align: center; padding: 2rem 0;">
     <p>© 2025 Scriptum Cordis — Written by <em>Lumen Obscura</em></p>
   </footer>
-
-  <!-- Music -->
-  <audio id="player" autoplay hidden></audio>
-  <div id="music-controls">
-    <button id="toggle-mute">🔊</button>
-    <span id="now-playing"></span>
-  </div>
-
-  <!-- Time Spent Script -->
-  <script>
-    let startTime = Date.now();
-    function formatDuration(ms) {
-      const sec = Math.floor(ms / 1000);
-      const min = Math.floor(sec / 60);
-      const hr = Math.floor(min / 60);
-      const s = sec % 60;
-      const m = min % 60;
-      const h = hr;
-
-      const hourText = h > 0 ? `${h} hour${h !== 1 ? 's' : ''}` : '';
-      const minuteText = m > 0 ? `${m} minute${m !== 1 ? 's' : ''}` : '';
-      const secondText = `${s} second${s !== 1 ? 's' : ''}`;
-
-      if (h > 0) return `${hourText}, ${minuteText}, and ${secondText}`;
-      else if (m > 0) return `${minuteText} and ${secondText}`;
-      return secondText;
-    }
-
-    function updateTimeSpent() {
-      const now = Date.now();
-      const duration = now - startTime;
-      document.getElementById("time-spent-display").textContent =
-        `⏱ Thank you, you have been with us for ${formatDuration(duration)}.`;
-    }
-    setInterval(updateTimeSpent, 1000);
-  </script>
-
-  <!-- Firebase Comment Script -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyBHqo9Zel_GOYdhw8GVphn-lfpSOO4KtYY",
-      authDomain: "scriptum-cordis-comments.firebaseapp.com",
-      databaseURL: "https://scriptum-cordis-comments-default-rtdb.asia-southeast1.firebasedatabase.app",
-      projectId: "scriptum-cordis-comments",
-      storageBucket: "scriptum-cordis-comments.appspot.com",
-      messagingSenderId: "285720317062",
-      appId: "1:285720317062:web:8dcfe1c17d60685aee1507"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-    const commentsRef = ref(db, "comments_karya2");
-
-    window.submitComment = function () {
-      const comment = document.getElementById("comment-input").value.trim();
-      if (comment === "") return;
-      const now = new Date();
-      const time = now.toLocaleTimeString('en-US', { hour12: false });
-      const date = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-      push(commentsRef, {
-        text: comment,
-        timestamp: `${time} — ${date}`
-      });
-      document.getElementById("comment-input").value = "";
-    };
-
-    const list = document.getElementById("comment-list");
-    onChildAdded(commentsRef, (data) => {
-      const item = document.createElement("li");
-      item.innerHTML = `<strong>${data.val().timestamp}</strong><br>${data.val().text}`;
-      list.prepend(item);
-    });
-  </script>
-
-  <!-- Music Player Script -->
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const playlist = [
-        "take_you_there_x_no_bs.mp3",
-        "love_you_too_much.mp3",
-        "skip_this_part.mp3",
-        "unmistakable.mp3",
-        "i_have_nothing.mp3",
-        "on_my_way.mp3",
-        "rahasia_hati.mp3",
-        "cool_enough_for_you.mp3",
-        "saturn_x_slow_dancing.mp3",
-        "make_you_mine.mp3",
-        "love_me.mp3",
-        "limbo.mp3"
-      ];
-
-      function shuffle(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
-      }
-
-      const player = document.getElementById("player");
-      const nowPlaying = document.getElementById("now-playing");
-      const toggleMute = document.getElementById("toggle-mute");
-
-      let shuffled = shuffle([...playlist]);
-      let current = 0;
-
-      function formatTrackName(filename) {
-        return filename
-          .replace(".mp3", "")
-          .replace(/_/g, " ")
-          .replace(/\b\w/g, l => l.toUpperCase());
-      }
-
-      function playNext() {
-        const track = shuffled[current];
-        player.src = track;
-        player.volume = 0.25;
-        nowPlaying.textContent = "Now Playing: " + formatTrackName(track);
-        player.play().catch(err => console.log("Autoplay failed:", err));
-      }
-
-      player.addEventListener("ended", () => {
-        current = (current + 1) % shuffled.length;
-        playNext();
-      });
-
-      toggleMute.addEventListener("click", () => {
-        player.muted = !player.muted;
-        toggleMute.textContent = player.muted ? "🔇" : "🔊";
-      });
-
-      document.body.addEventListener("click", function firstClick() {
-        player.play().catch(() => {});
-        document.body.removeEventListener("click", firstClick);
-      });
-
-      playNext();
-    });
-  </script>
 
   <!-- Falling Stars Script -->
   <script>
@@ -263,6 +128,75 @@
     }
 
     animateStars();
+  </script>
+
+  <!-- Time Spent Script -->
+  <script>
+    let startTime = Date.now();
+    function formatDuration(ms) {
+      const sec = Math.floor(ms / 1000);
+      const min = Math.floor(sec / 60);
+      const hr = Math.floor(min / 60);
+      const s = sec % 60;
+      const m = min % 60;
+      const h = hr;
+
+      const hourText = h > 0 ? `${h} hour${h !== 1 ? 's' : ''}` : '';
+      const minuteText = m > 0 ? `${m} minute${m !== 1 ? 's' : ''}` : '';
+      const secondText = `${s} second${s !== 1 ? 's' : ''}`;
+
+      if (h > 0) return `${hourText}, ${minuteText}, and ${secondText}`;
+      else if (m > 0) return `${minuteText} and ${secondText}`;
+      return secondText;
+    }
+
+    function updateTimeSpent() {
+      const now = Date.now();
+      const duration = now - startTime;
+      document.getElementById("time-spent-display").textContent =
+        `⏱ Thank you, you have been with us for ${formatDuration(duration)}.`;
+    }
+    setInterval(updateTimeSpent, 1000);
+  </script>
+
+  <!-- Firebase Komentar -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBHqo9Zel_GOYdhw8GVphn-lfpSOO4KtYY",
+      authDomain: "scriptum-cordis-comments.firebaseapp.com",
+      databaseURL: "https://scriptum-cordis-comments-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "scriptum-cordis-comments",
+      storageBucket: "scriptum-cordis-comments.appspot.com",
+      messagingSenderId: "285720317062",
+      appId: "1:285720317062:web:8dcfe1c17d60685aee1507"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const commentsRef = ref(db, "comments_karya2");
+
+    window.submitComment = function () {
+      const comment = document.getElementById("comment-input").value.trim();
+      if (comment === "") return;
+      const now = new Date();
+      const time = now.toLocaleTimeString('en-US', { hour12: false });
+      const date = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+      push(commentsRef, {
+        text: comment,
+        timestamp: `${time} — ${date}`
+      });
+      document.getElementById("comment-input").value = "";
+    };
+
+    const list = document.getElementById("comment-list");
+    onChildAdded(commentsRef, (data) => {
+      const item = document.createElement("li");
+      item.innerHTML = `<strong>${data.val().timestamp}</strong><br>${data.val().text}`;
+      list.prepend(item);
+    });
   </script>
 </body>
 </html>
