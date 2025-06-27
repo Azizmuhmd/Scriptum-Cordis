@@ -1,7 +1,7 @@
-/* === Dasar === */
+/* Font dan Warna Dasar */
 body {
-  background-color: #0e0f1c;
-  color: #f2e9e4;
+  background-color: #1C1C1E;
+  color: #F2E9E4;
   font-family: 'Crimson Pro', serif;
   font-size: 16px;
   line-height: 1.8;
@@ -9,12 +9,11 @@ body {
   padding: 0;
 }
 
-/* === Header === */
+/* Header */
 header {
   text-align: center;
   padding: 3rem 1rem;
-  background-color: rgba(20, 20, 30, 0.7);
-  backdrop-filter: blur(4px);
+  background-color: #2E2E30;
 }
 
 .logo-lily {
@@ -42,70 +41,68 @@ header h1 {
 
 .tagline {
   font-style: italic;
-  color: #bfa5a0;
+  color: #BFA5A0;
   font-size: 1rem;
   text-align: center;
 }
 
-/* === Navigasi === */
+/* Navigasi */
 nav {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  background-color: #2e2e30;
+  background-color: #2E2E30;
   padding: 1rem;
   gap: 1rem;
 }
 
 nav a {
-  color: #f2e9e4;
+  color: #F2E9E4;
   text-decoration: none;
   padding: 0.5rem 1rem;
   border-radius: 10px;
-  background-color: #2e2e2e;
+  background-color: #2E2E2E;
   font-weight: bold;
-  transition: all 0.3s ease;
 }
 
 nav a:hover {
   background-color: #444;
-  color: #bfa5a0;
+  color: #BFA5A0;
 }
 
-/* === Konten Utama === */
+/* Konten Utama */
 main {
   max-width: 800px;
   margin: 2rem auto;
-  padding: 2rem 1rem;
-  background-color: rgba(20, 20, 30, 0.7);
-  backdrop-filter: blur(4px);
-  border-radius: 12px;
+  padding: 0 1rem;
 }
 
-/* === Artikel atau Puisi === */
+article {
+  background-color: #2A2A2C;
+  padding: 2rem;
+  border-radius: 8px;
+}
+
 article h2 {
-  font-family: 'Playfair Display', serif;
   font-size: 1.5rem;
-  margin-top: 0;
+  font-family: 'Playfair Display', serif;
 }
 
 .date {
   font-size: 0.9rem;
-  color: #bfa5a0;
+  color: #BFA5A0;
   margin-bottom: 1rem;
 }
 
-/* === Footer === */
+/* Footer */
 footer {
   text-align: center;
   padding: 2rem 1rem;
   font-size: 0.9rem;
-  color: #5e5a66;
-  background-color: rgba(20, 20, 30, 0.7);
-  backdrop-filter: blur(4px);
+  color: #5E5A66;
 }
 
-/* === Tautan Umum === */
+/* Tautan Umum */
 a {
   color: #e8d8c4;
   text-decoration: none;
@@ -116,7 +113,7 @@ a:hover {
   text-decoration: underline;
 }
 
-/* === Musik Control === */
+/* Musik Control */
 #music-controls {
   position: fixed;
   bottom: 1rem;
@@ -140,7 +137,7 @@ a:hover {
   cursor: pointer;
 }
 
-/* === Responsif === */
+/* Responsif */
 @media (max-width: 600px) {
   body {
     font-size: 15px;
