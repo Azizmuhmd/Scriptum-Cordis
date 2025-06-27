@@ -3,10 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Di Antara Luka<br>yang Tak Bertepuk</title>
+  <title>Di Antara Luka yang Tak Bertepuk</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background-color: #0e0f1c;
+      color: #f0f0f0;
+      font-family: 'Georgia', serif;
+    }
+    header, main, footer, nav, section {
+      position: relative;
+      z-index: 1;
+    }
+    main, section {
+      background-color: rgba(20, 20, 30, 0.6);
+      backdrop-filter: blur(4px);
+      border-radius: 12px;
+    }
+  </style>
 </head>
 <body>
+  <!-- Falling Stars Canvas -->
+  <canvas id="stars-canvas" style="position: fixed; top: 0; left: 0; z-index: 0;"></canvas>
+
   <header>
     <img src="58cce829-a320-4a6b-9232-501619d06593.png" alt="Logo Bunga Lily" style="width: 120px; display: block; margin: 0 auto 1rem auto;" />
     <h1>Di Antara Luka<br>yang Tak Bertepuk</h1>
@@ -61,9 +80,9 @@
     <span id="now-playing"></span>
   </div>
 
+  <!-- Time Spent Script -->
   <script>
     let startTime = Date.now();
-
     function formatDuration(ms) {
       const sec = Math.floor(ms / 1000);
       const min = Math.floor(sec / 60);
@@ -84,11 +103,13 @@
     function updateTimeSpent() {
       const now = Date.now();
       const duration = now - startTime;
-      document.getElementById("time-spent-display").textContent = `⏱ Thank you, you have been with us for ${formatDuration(duration)}.`;
+      document.getElementById("time-spent-display").textContent =
+        `⏱ Thank you, you have been with us for ${formatDuration(duration)}.`;
     }
     setInterval(updateTimeSpent, 1000);
   </script>
 
+  <!-- Firebase Comment Script -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
@@ -127,7 +148,8 @@
       list.prepend(item);
     });
   </script>
-   <!-- Musik -->
+
+  <!-- Music Player Script -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const playlist = [
@@ -172,7 +194,7 @@
         player.src = track;
         player.volume = 0.25;
         nowPlaying.textContent = "Now Playing: " + formatTrackName(track);
-        player.play().catch(err => console.log("Gagal autoplay:", err));
+        player.play().catch(err => console.log("Autoplay failed:", err));
       }
 
       player.addEventListener("ended", () => {
@@ -192,6 +214,55 @@
 
       playNext();
     });
+  </script>
+
+  <!-- Falling Stars Script -->
+  <script>
+    const canvas = document.getElementById('stars-canvas');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function createStar() {
+      return {
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 1.2 + 0.5,
+        speed: Math.random() * 0.5 + 0.2,
+        opacity: Math.random() * 0.5 + 0.3
+      };
+    }
+
+    for (let i = 0; i < 120; i++) {
+      stars.push(createStar());
+    }
+
+    function animateStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < stars.length; i++) {
+        const s = stars[i];
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${s.opacity})`;
+        ctx.fill();
+        s.y += s.speed;
+        s.x -= s.speed * 0.3;
+
+        if (s.y > canvas.height || s.x < 0) {
+          stars[i] = createStar();
+          stars[i].y = 0;
+        }
+      }
+      requestAnimationFrame(animateStars);
+    }
+
+    animateStars();
   </script>
 </body>
 </html>
