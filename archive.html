@@ -31,7 +31,7 @@
       </article>
     </section>
   </main>
-   <!-- Pemutar Musik -->
+ <!-- Pemutar Musik -->
 <audio id="player" autoplay hidden></audio>
 
 <!-- Kontrol Volume -->
@@ -40,54 +40,60 @@
   <span id="now-playing"></span>
 </div>
 
-    
-
 <script>
-  const playlist = [
-    "Take You There X No BS.mp3", "Love You Too Much.mp3", "Skip This Part.mp3", "Unmistakable.mp3",
-    "I Have Nothing.mp3", "On My Way.mp3", "Rahasia Hati.mp3", "Cool Enough For You.mp3",
-    "Saturn X Slow Dancing.mp3", "Make You Mine.mp3", "Love Me.mp3", "Limbo.mp3"
-  ];
+  document.addEventListener("DOMContentLoaded", () => {
+    const playlist = [
+      "Take You There X No BS.mp3", "Love You Too Much.mp3", "Skip This Part.mp3", "Unmistakable.mp3",
+      "I Have Nothing.mp3", "On My Way.mp3", "Rahasia Hati.mp3", "Cool Enough For You.mp3",
+      "Saturn X Slow Dancing.mp3", "Make You Mine.mp3", "Love Me.mp3", "Limbo.mp3"
+    ];
 
-  function shuffle(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
     }
-    return array;
-  }
 
-  const player = document.getElementById("player");
-  const nowPlaying = document.getElementById("now-playing");
-  const toggleMute = document.getElementById("toggle-mute");
+    const player = document.getElementById("player");
+    const nowPlaying = document.getElementById("now-playing");
+    const toggleMute = document.getElementById("toggle-mute");
 
-  let shuffled = shuffle([...playlist]);
-  let current = 0;
+    let shuffled = shuffle([...playlist]);
+    let current = 0;
 
-  function playNext() {
-    player.src = shuffled[current];
-    player.volume = 0.15;
-    nowPlaying.textContent = "Now Playing: " + shuffled[current].replace(".mp3", "").replace("lagu", "Lagu ");
-    player.play().catch(() => {});
-  }
+    function playNext() {
+      const track = shuffled[current];
+      player.src = track;
+      player.volume = 0.15;
+      nowPlaying.textContent = "Now Playing: " + track.replace(".mp3","");
+      console.log("Menyetel lagu:", track);
+      player.play().catch(err => {
+        console.log("Gagal autoplay:", err);
+      });
+    }
 
-  player.addEventListener("ended", () => {
-    current = (current + 1) % shuffled.length;
+    player.addEventListener("ended", () => {
+      current = (current + 1) % shuffled.length;
+      playNext();
+    });
+
+    toggleMute.addEventListener("click", () => {
+      player.muted = !player.muted;
+      toggleMute.textContent = player.muted ? "🔇" : "🔊";
+    });
+
+    // Fix autoplay di HP: mulai setelah interaksi
+    function firstInteraction() {
+      player.play().catch(() => {});
+      document.body.removeEventListener("click", firstInteraction);
+    }
+    document.body.addEventListener("click", firstInteraction);
+
+    // Mulai sekali
     playNext();
   });
-
-  toggleMute.addEventListener("click", () => {
-    player.muted = !player.muted;
-    toggleMute.textContent = player.muted ? "🔇" : "🔊";
-  });
-
-  // Fix autoplay untuk HP
-  document.body.addEventListener("click", function firstInteraction() {
-    player.play().catch(() => {});
-    document.body.removeEventListener("click", firstInteraction);
-  });
-
-  playNext();
 </script>
 </body>
 </html>
