@@ -8,7 +8,7 @@
 </head>
 <body>
   <header>
-    <img src="58cce829-a320-4a6b-9232-501619d06593.png" alt="Logo Bunga Lily" style="width: 120px; display: block; margin: 0 auto 1rem auto;" />
+    <img src="58cce829-a320-4a6b-9232-501619d06593.png" alt="Logo Bunga Lily" class="logo-lily" />
     <h1>About Me</h1>
     <p class="tagline">"Lumen Obscura — a name. a bright light, in a grimey city."</p>
     <a href="index.html" class="button">⟵ Back to Homepage</a>
@@ -30,124 +30,118 @@
 
     <p>
       Lumen Obscura adalah sebuah nama pena dari seseorang yang lebih sering menulis dalam waktu luangnya.
-      Meski sempat menjauh dari dunia tulisan, kini ia kembali, menyusuri jejak jejak sunyi-<br>
-      yang dulu pernah ia tinggalkan.<br>
+      Meski sempat menjauh dari dunia tulisan, kini ia kembali, menyusuri jejak jejak sunyi —<br>
+      yang dulu pernah ia tinggalkan.
     </p>
 
     <p>
-      Lewat untaian kata, ia mencurahkan hal hal yang tak sempat terucap:<br>  
-      tentang rasa gundah gulana, tetang kehilangan, tetang cinta,<br>
-      dan tak pula lupa, harapan yang tak selalu pulang.<br>
+      Lewat untaian kata, ia mencurahkan hal-hal yang tak sempat terucap:<br>  
+      tentang rasa gundah gulana, tentang kehilangan, tentang cinta,<br>
+      dan tak pula lupa, harapan yang tak selalu pulang.
     </p>
 
-
-    
     <p>
       <strong>Scriptum Cordis, Solum Caelis</strong> — <em>sub silentio, veritas.</em><br />
       Beneath the silence, the truth.<br>
-      some of you might ask - what is scriptum cordis, solum caelis?<br>
-      it translates to a writing of the heart, grounded in the heavens.<br>
-      the philosophy behind this is that, It represents a space where words are not merely crafted,
-      but born from the depth of feeling; untouched by earthly bounds, floating freely through the skies,<br>
-      seeking no place but the embrace of the universe.<br>
-    </p>
-    <p>
-      Every piece written here is a reflection of the silent echoes within,<br>
-      a whisper from the soul to the stars, a reminder that not all stories are meant to be explained,<br>
-      some are simply meant to be felt, to drift gently into the vastness of existence,<br>
-      and find rest not on paper, but in the quiet spaces between hearts.<br>
+      Some of you might ask — what is scriptum cordis, solum caelis?<br>
+      It translates to a writing of the heart, grounded in the heavens.<br>
+      The philosophy behind this is that it represents a space where words are not merely crafted,
+      but born from the depth of feeling; untouched by earthly bounds, floating freely through the skies,
+      seeking no place but the embrace of the universe.
     </p>
 
-    
+    <p>
+      Every piece written here is a reflection of the silent echoes within,
+      a whisper from the soul to the stars, a reminder that not all stories are meant to be explained —
+      some are simply meant to be felt, to drift gently into the vastness of existence,
+      and find rest not on paper, but in the quiet spaces between hearts.
+    </p>
+
     <p>
       Singkatnya,<br>
       Ini bukan tempat untuk didengar, melainkan untuk dibaca.<br> 
-      Dan mungkin, suatu hari nanti, <em>dipahami.</em><br>
+      Dan mungkin, suatu hari nanti, <em>dipahami.</em>
     </p>
   </main>
 
   <footer style="text-align: center; padding: 2rem 0;">
     <p>© 2025 Scriptum Cordis — Written by <em>Lumen Obscura</em></p>
   </footer>
-   <!-- Pemutar Musik -->
-<audio id="player" autoplay hidden></audio>
 
-<!-- Kontrol Volume -->
-<div id="music-controls">
-  <button id="toggle-mute">🔊</button>
-  <span id="now-playing"></span>
-</div>
+  <!-- Pemutar Musik -->
+  <audio id="player" autoplay hidden></audio>
 
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const playlist = [
-      "take_you_there_x_no_bs.mp3",
-      "love_you_too_much.mp3",
-      "skip_this_part.mp3",
-      "unmistakable.mp3",
-      "i_have_nothing.mp3",
-      "on_my_way.mp3",
-      "rahasia_hati.mp3",
-      "cool_enough_for_you.mp3",
-      "saturn_x_slow_dancing.mp3",
-      "make_you_mine.mp3",
-      "love_me.mp3",
-      "limbo.mp3"
-    ];
+  <!-- Kontrol Volume -->
+  <div id="music-controls">
+    <button id="toggle-mute">🔊</button>
+    <span id="now-playing"></span>
+  </div>
 
-    function shuffle(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
+  <!-- Musik Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const playlist = [
+        "take_you_there_x_no_bs.mp3",
+        "love_you_too_much.mp3",
+        "skip_this_part.mp3",
+        "unmistakable.mp3",
+        "i_have_nothing.mp3",
+        "on_my_way.mp3",
+        "rahasia_hati.mp3",
+        "cool_enough_for_you.mp3",
+        "saturn_x_slow_dancing.mp3",
+        "make_you_mine.mp3",
+        "love_me.mp3",
+        "limbo.mp3"
+      ];
+
+      function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
       }
-      return array;
-    }
 
-    const player = document.getElementById("player");
-    const nowPlaying = document.getElementById("now-playing");
-    const toggleMute = document.getElementById("toggle-mute");
+      const player = document.getElementById("player");
+      const nowPlaying = document.getElementById("now-playing");
+      const toggleMute = document.getElementById("toggle-mute");
 
-    let shuffled = shuffle([...playlist]);
-    let current = 0;
+      let shuffled = shuffle([...playlist]);
+      let current = 0;
 
-    function formatTrackName(filename) {
-      return filename
-        .replace(".mp3", "")
-        .replace(/_/g, " ")
-        .replace(/\b\w/g, l => l.toUpperCase()); // Kapitalisasi setiap kata
-    }
+      function formatTrackName(filename) {
+        return filename
+          .replace(".mp3", "")
+          .replace(/_/g, " ")
+          .replace(/\b\w/g, l => l.toUpperCase());
+      }
 
-    function playNext() {
-      const track = shuffled[current];
-      player.src = track;
-      player.volume = 0.25;
-      nowPlaying.textContent = "Now Playing: " + formatTrackName(track);
-      console.log("Menyetel lagu:", track);
-      player.play().catch(err => {
-        console.log("Gagal autoplay:", err);
+      function playNext() {
+        const track = shuffled[current];
+        player.src = track;
+        player.volume = 0.25;
+        nowPlaying.textContent = "Now Playing: " + formatTrackName(track);
+        player.play().catch(err => console.log("Autoplay failed:", err));
+      }
+
+      player.addEventListener("ended", () => {
+        current = (current + 1) % shuffled.length;
+        playNext();
       });
-    }
 
-    player.addEventListener("ended", () => {
-      current = (current + 1) % shuffled.length;
+      toggleMute.addEventListener("click", () => {
+        player.muted = !player.muted;
+        toggleMute.textContent = player.muted ? "🔇" : "🔊";
+      });
+
+      document.body.addEventListener("click", function firstClick() {
+        player.play().catch(() => {});
+        document.body.removeEventListener("click", firstClick);
+      });
+
       playNext();
     });
-
-    toggleMute.addEventListener("click", () => {
-      player.muted = !player.muted;
-      toggleMute.textContent = player.muted ? "🔇" : "🔊";
-    });
-
-    // Fix autoplay di HP: mulai setelah interaksi
-    function firstInteraction() {
-      player.play().catch(() => {});
-      document.body.removeEventListener("click", firstInteraction);
-    }
-    document.body.addEventListener("click", firstInteraction);
-
-    // Mulai sekali
-    playNext();
-  });
-</script>
+  </script>
 </body>
 </html>
