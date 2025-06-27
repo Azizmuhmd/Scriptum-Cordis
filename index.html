@@ -50,7 +50,6 @@
 </div>
 
     
-    <audio id="player" autoplay hidden></audio>
 
 <script>
   const playlist = [
@@ -59,7 +58,6 @@
     "lagu9.mp3", "lagu10.mp3", "lagu11.mp3", "lagu12.mp3"
   ];
 
-  // Fungsi untuk mengacak playlist
   function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -69,18 +67,33 @@
   }
 
   const player = document.getElementById("player");
+  const nowPlaying = document.getElementById("now-playing");
+  const toggleMute = document.getElementById("toggle-mute");
+
   let shuffled = shuffle([...playlist]);
   let current = 0;
 
   function playNext() {
     player.src = shuffled[current];
-    player.volume = 0.25; // Lembut dan tidak mengganggu
-    player.play().catch(() => {}); // Tangani autoplay error (HP)
+    player.volume = 0.15;
+    nowPlaying.textContent = "Now Playing: " + shuffled[current].replace(".mp3", "").replace("lagu", "Lagu ");
+    player.play().catch(() => {});
   }
 
   player.addEventListener("ended", () => {
     current = (current + 1) % shuffled.length;
     playNext();
+  });
+
+  toggleMute.addEventListener("click", () => {
+    player.muted = !player.muted;
+    toggleMute.textContent = player.muted ? "🔇" : "🔊";
+  });
+
+  // Fix autoplay untuk HP
+  document.body.addEventListener("click", function firstInteraction() {
+    player.play().catch(() => {});
+    document.body.removeEventListener("click", firstInteraction);
   });
 
   playNext();
