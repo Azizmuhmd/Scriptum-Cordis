@@ -81,8 +81,17 @@ article {
   background-color: transparent;
   padding: 2rem;
   border-radius: 8px;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  filter: none !important;
 }
 
+/* Pastikan semua teks tetap tajam */
+article, #burning-line, .sparkle {
+  filter: none !important;
+}
+
+/* Heading artikel */
 article h2 {
   font-size: 1.5rem;
   font-family: 'Playfair Display', serif;
@@ -176,6 +185,7 @@ a:hover {
   padding: 0.2em 0.4em;
   z-index: 1;
   isolation: isolate;
+  filter: none;
 }
 
 /* Kata dengan efek menyala */
@@ -190,6 +200,7 @@ a:hover {
     0 0 20px #ff3300;
   transition: all 0.3s ease-in-out;
   z-index: 2;
+  filter: none;
 }
 
 #burning-line .sparkle:hover {
@@ -210,7 +221,7 @@ a:hover {
   animation: flameFlow 0.4s infinite ease-in-out;
   z-index: 1;
   mix-blend-mode: screen;
-  filter: blur(3px);
+  filter: blur(2px);
   pointer-events: none;
 }
 
