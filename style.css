@@ -258,6 +258,7 @@ a:hover {
   border-radius: 2px;
 }
 
+
 /* Menghapus semua blur & filter */
 body, main, article, section, p, span, * {
   backdrop-filter: none !important;
