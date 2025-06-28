@@ -216,3 +216,7 @@ a:hover {
   cursor: default;
 }
 
+header, nav, main, section, footer {
+  position: relative;
+  z-index: 1;
+}
