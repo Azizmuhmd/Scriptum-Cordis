@@ -69,10 +69,11 @@
     <p>Dan aku terdiam,<br>
       Menjadi sunyi yang menampung teriakku sendiri,<br>
       Menjadi tisu bagi tangisku sendiri,<br>
-      Menjadi rumah yang hangus oleh api,<br>
-      Yang tak pernah kau <span id="extinguish-btn" class="sparkle">padamkan</span>.
+      <span id="burning-line">
+  Menjadi rumah yang hangus oleh api,<br>
+  Yang tak pernah kau <span class="sparkle">padamkan</span>.
   <span class="fire-overlay"></span>
-</span></p>
+</span>
 
     
     <p>Aku tahu aku bersalah,<br>Tapi bukan berarti aku tak layak untuk dimanusiakan.<br>Bukan berarti aku hanya pantas dimarahi, dihakimi,<br>Dan tak diberi ruang untuk diperbaiki, dikasihi, disayangi.</p>
@@ -288,5 +289,21 @@
       playNext();
     });
   </script>
+  <script>
+  // 🔥 Efek "padamkan" yang tersimpan di browser
+  document.addEventListener("DOMContentLoaded", () => {
+    const line = document.getElementById("burning-line");
+    const padamkan = line?.querySelector(".sparkle");
+
+    if (localStorage.getItem("apiPadam") === "true") {
+      line.classList.add("extinguished");
+    }
+
+    padamkan?.addEventListener("click", () => {
+      line.classList.add("extinguished");
+      localStorage.setItem("apiPadam", "true");
+    });
+  });
+</script>
 </body>
 </html>
