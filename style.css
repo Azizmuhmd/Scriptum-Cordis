@@ -198,23 +198,40 @@ a:hover {
     0 0 20px #fff;
 }
 
-/* Api menyelimuti huruf dengan gif transparan */
+/* Api gif menyala */
 #burning-line::before {
   content: '';
   position: absolute;
-  bottom: -20px;
+  top: -60%;
   left: 50%;
   transform: translateX(-50%);
-  width: 120px;
-  height: 80px;
+  width: 140px;
+  height: 140px;
   background-image: url('flame.gif');
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: center bottom;
+  background-position: center center;
   z-index: 1;
   pointer-events: none;
   mix-blend-mode: screen;
-  opacity: 1;
+  opacity: 0.9;
+  animation: flickerFlame 1.2s infinite ease-in-out;
+}
+
+/* Animasi api */
+@keyframes flickerFlame {
+  0% {
+    opacity: 0.9;
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translateX(-50%) scale(1.05);
+  }
+  100% {
+    opacity: 0.85;
+    transform: translateX(-50%) scale(1);
+  }
 }
 
 /* Saat padam */
