@@ -74,7 +74,7 @@
   Yang tak pernah kau 
   <span id="burning-line">
     <span class="sparkle">padamkan</span>
-    <span class="fire-overlay"></span>
+    <span class="fire-flames"></span>
   </span>.
 </p>
 
@@ -293,20 +293,20 @@
     });
   </script>
   <script>
-  // 🔥 Efek "padamkan" yang tersimpan di browser
   document.addEventListener("DOMContentLoaded", () => {
-    const line = document.getElementById("burning-line");
-    const padamkan = line?.querySelector(".sparkle");
+    const burningLine = document.getElementById("burning-line");
+    const sparkle = burningLine.querySelector(".sparkle");
 
-    if (localStorage.getItem("apiPadam") === "true") {
-      line.classList.add("extinguished");
-    }
+    let apiSudahPadam = false; // hanya untuk sesi ini
 
-    padamkan?.addEventListener("click", () => {
-      line.classList.add("extinguished");
-      localStorage.setItem("apiPadam", "true");
+    sparkle.addEventListener("click", () => {
+      if (!apiSudahPadam) {
+        burningLine.classList.add("extinguished");
+        apiSudahPadam = true;
+      }
     });
   });
 </script>
 </body>
 </html>
+
