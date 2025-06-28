@@ -197,39 +197,39 @@ a:hover {
     0 0 20px #fff;
 }
 
-/* Api gif menyala dengan posisi di bawah tulisan */
+/* Api gif menyala tepat di belakang kata */
 #burning-line::before {
   content: '';
   position: absolute;
-  bottom: -5px;
+  bottom: 0;
   left: 50%;
-  transform: translateX(-50%) translateY(100%);
-  width: 100px;
-  height: 60px;
+  transform: translateX(-50%) translateY(10%);
+  width: 140px;
+  height: 100px;
   background-image: url('flame.gif');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center bottom;
   z-index: 0;
   pointer-events: none;
-  mix-blend-mode: screen;
   opacity: 1;
+  mix-blend-mode: screen;
   animation: flickerFlame 1.2s infinite ease-in-out;
 }
 
-/* Animasi api menyala berkedip */
+/* Animasi api */
 @keyframes flickerFlame {
   0% {
     opacity: 0.9;
-    transform: translateX(-50%) translateY(100%) scale(1);
+    transform: translateX(-50%) translateY(10%) scale(1);
   }
   50% {
     opacity: 0.6;
-    transform: translateX(-50%) translateY(100%) scale(1.05);
+    transform: translateX(-50%) translateY(12%) scale(1.05);
   }
   100% {
     opacity: 0.85;
-    transform: translateX(-50%) translateY(100%) scale(1);
+    transform: translateX(-50%) translateY(10%) scale(1);
   }
 }
 
@@ -238,7 +238,6 @@ a:hover {
   color: #8899aa;
   text-shadow: none;
   cursor: default;
-  transition: all 0.5s ease;
 }
 
 #burning-line.extinguished::before {
