@@ -178,6 +178,7 @@ a:hover {
   z-index: 1;
 }
 
+/* Kata “padamkan” dengan efek api */
 #burning-line .sparkle {
   position: relative;
   color: #ffdd99;
@@ -197,13 +198,27 @@ a:hover {
   top: -50%;
   left: 50%;
   transform: translateX(-50%);
-  width: 120px;
-  height: 120px;
-  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,140,0,0.6) 40%, rgba(255,0,0,0) 100%);
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(255,140,0,0.4) 30%, transparent 70%);
   border-radius: 50%;
   animation: flames 0.3s infinite alternate;
   pointer-events: none;
   z-index: -1;
+  mix-blend-mode: lighten;
+}
+
+.fire-flames::after {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 115%;
+  height: 115%;
+  background: radial-gradient(circle, rgba(255, 80, 0, 0.3), transparent 80%);
+  border-radius: 50%;
+  filter: blur(4px);
+  opacity: 0.35;
 }
 
 /* Efek nyala padam */
@@ -218,20 +233,6 @@ a:hover {
   }
 }
 
-/* Glow tambahan api (efek leleh) */
-.fire-flames::after {
-  content: '';
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  width: 120%;
-  height: 120%;
-  background: radial-gradient(circle, rgba(255, 80, 0, 0.4), transparent 70%);
-  border-radius: 50%;
-  filter: blur(8px);
-  opacity: 0.5;
-}
-
 /* Saat api padam */
 #burning-line.extinguished .fire-flames {
   display: none;
@@ -243,7 +244,7 @@ a:hover {
   cursor: default;
 }
 
-/* Tata letak elemen utama agar efek tidak terganggu */
+/* Tata letak utama tidak terganggu */
 header, nav, main, section, footer {
   position: relative;
   z-index: 1;
