@@ -291,17 +291,14 @@
       playNext();
     });
   </script>
-  <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const burningLine = document.getElementById("burning-line");
-    const sparkle = burningLine.querySelector(".sparkle");
+ <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const burningLine = document.getElementById('burning-line');
+    const sparkle = burningLine.querySelector('.sparkle');
 
-    let apiSudahPadam = false; // hanya untuk sesi ini
-
-    sparkle.addEventListener("click", () => {
-      if (!apiSudahPadam) {
-        burningLine.classList.add("extinguished");
-        apiSudahPadam = true;
+    sparkle.addEventListener('click', function () {
+      if (!burningLine.classList.contains('extinguished')) {
+        burningLine.classList.add('extinguished');
       }
     });
   });
