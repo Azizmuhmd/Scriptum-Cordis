@@ -81,17 +81,8 @@ article {
   background-color: transparent;
   padding: 2rem;
   border-radius: 8px;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  filter: none !important;
 }
 
-/* Pastikan semua teks tetap tajam */
-article, #burning-line, .sparkle {
-  filter: none !important;
-}
-
-/* Heading artikel */
 article h2 {
   font-size: 1.5rem;
   font-family: 'Playfair Display', serif;
@@ -185,7 +176,6 @@ a:hover {
   padding: 0.2em 0.4em;
   z-index: 1;
   isolation: isolate;
-  filter: none;
 }
 
 /* Kata dengan efek menyala */
@@ -200,7 +190,6 @@ a:hover {
     0 0 20px #ff3300;
   transition: all 0.3s ease-in-out;
   z-index: 2;
-  filter: none;
 }
 
 #burning-line .sparkle:hover {
@@ -209,7 +198,7 @@ a:hover {
     0 0 20px #fff;
 }
 
-/* Api menyelimuti huruf ala Ghost Rider */
+/* Api menyelimuti huruf */
 #burning-line::before {
   content: '';
   position: absolute;
@@ -221,11 +210,10 @@ a:hover {
   animation: flameFlow 0.4s infinite ease-in-out;
   z-index: 1;
   mix-blend-mode: screen;
-  filter: blur(2px);
   pointer-events: none;
 }
 
-/* Animasi nyala menjilat */
+/* Animasi api menjilat */
 @keyframes flameFlow {
   0% {
     transform: translateY(0) scale(1);
@@ -259,6 +247,12 @@ a:hover {
   margin: 0.2rem auto 0 auto;
   opacity: 0.4;
   border-radius: 2px;
+}
+
+/* Menghapus semua blur & filter */
+body, main, article, section, p, span, * {
+  backdrop-filter: none !important;
+  filter: none !important;
 }
 
 /* Tata letak utama tidak terganggu */
