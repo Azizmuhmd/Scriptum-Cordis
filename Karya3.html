@@ -1,1 +1,358 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ad Aeternum, Semper Tuum</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background-color: #0e0f1c;
+      color: #f0f0f0;
+      font-family: 'Georgia', serif;
+    }
+    header, main, footer, nav, section {
+      position: relative;
+      z-index: 1;
+    }
+    main, section {
+      background-color: rgba(20, 20, 30, 0.6);
+      backdrop-filter: blur(4px);
+      border-radius: 12px;
+    }
+    #stars-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <!-- Falling Stars Canvas -->
+  <canvas id="stars-canvas"
+    style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    ">
+</canvas>
+
+  <header>
+    <img src="58cce829-a320-4a6b-9232-501619d06593.png" alt="Logo Bunga Lily" class="logo-lily" />
+    <h1>Ad Aeternum, Semper Tuum</h1>
+    <p class="tagline">“forever i go, still yours i remain.”</p>
+    <a href="archive.html" class="button">⟵ Back To Archive</a>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="archive.html">Archive</a>
+    <a href="about.html">About</a>
+  </nav>
+
+  <main style="max-width: 700px; margin: auto; padding: 2rem; line-height: 1.8;">
+    <!-- Isi Puisi -->
+    <p>
+      Pernah aku percaya, bahwa cinta hanyalah sebuah ilusi.<br>
+Sekadar nyanyian sendu dalam puisi,<br>
+tak lebih dari mimpi para penyair di dini hari.<br>
+Hingga; engkau datang.<br>
+Dan segalanya; perlahan, berganti.<br>
+</p>
+
+<p>
+Hadirmu ada, bukan karena kupinta.<br>
+Namun semesta menaruhmu, pada garis takdirku.<br>
+Bagai takdir yang datang tanpa aba aba,<br>
+namun menjelma keajaiban yang tak pernah kupeluk sebelumnya.<br>
+Dalam tatapanmu, aku menemukan arti pulang,<br>
+dalam genggammu, kutemukan tenang.<br>
+</p>
+
+<p>
+Kupanggil engkau Semestaku; bukan hanya sekadar nama.<br>
+Karena bagiku; hadirmu membentang seperti angkasa yang tak berbatas,<br>
+dan jiwamu bercahaya, seperti bintang pada gelap yang paling pekat.<br>
+Kamu adalah matahari yang selalu setia,<br>
+mengusir dingin dari pagi pagi yang hampa.<br>
+</p>
+
+<p>
+Satu tahun lebih, kita telah bersama.<br>
+Mengarungi gelombang waktu,<br>
+melewati ombak ragu, menguatkan langkah di jalan yang tak selalu rata.<br> 
+Aku melihatmu dalam segala bentuk keindahan. Dalam senyuman kecilmu,<br>
+dalam perhatian perhatian sederhana yang kamu sisipkan tanpa diminta,<br>
+dalam setiap genggaman tangan yang kau berikan serta kuatkan,<br>
+saat dunia terasa melelahkan.<br>
+</p>
+
+<p>
+Bagaimana mungkin aku tidak mencintaimu sedalam ini?<br>
+Jika setiap hela nafasku ada karena hadirmu ?<br>
+Juga detik dan detaknya jantungku,<br>
+seirama namamu ?<br>
+</p>
+
+<p>
+Aku tahu, perjalanan kita masih panjang.<br>
+Akan ada badai yang mencoba merobohkan,<br>
+akan ada malam yang mungkin terasa dingin dan sepi.<br>
+Tetapi bila kamu berada di sisiku, aku tak gentar.<br>
+Laksana bintang yang selalu kembali meski malam gelap,<br>
+aku; akan selalu, kembali padamu.<br>
+</p>
+
+<p>
+Karena kamu,<br>
+adalah jawaban atas doa doa yang kupanjat, juga yang tak sempat terucap.<br>
+</p>
+
+<p>
+Karena kamu,<br>
+adalah rumah bagi jiwaku yang paling gelisah.<br>
+Dan karena kamu; adalah semesta,<br>
+yang tak akan pernah lelah kucintai.<br>
+</p>
+
+<p>
+Maka dengarlah, Semestaku;<br>
+dalam kencangnya hembusan angin,<br>
+dalam derasnya rintik hujan,<br>
+dalam sunyi, pada bisik doa yang kuucapkan dalam diam.<br>
+Aku memilihmu, selalu.<br>
+Hari ini, esok, dan selamanya.<br>
+</p>
+
+<p>
+Tertanda, Milikmu selalu,<br>
+Ayid.<br>
+</p>
+
+<p>
+P.S. you know, i saw a quote the other day my love.<br>
+It goes something like this..<br>
+My wife,<br>
+She put her arms around me,<br>
+She becomes a cape,<br>
+And i become superman.<br>
+And truth be told, itu ngingetin aku ke kamu.<br>
+Always be my cape ya, semestaku.<br>
+I love you❤️
+</p>
+
+    <!-- Time Spent -->
+    <p id="time-spent-display" style="margin-top: 2rem; font-style: italic; color: #aaa;"></p>
+  </main>
+
+  <!-- Komentar -->
+  <section style="max-width: 700px; margin: 3rem auto; padding: 0 1rem;">
+    <h3>Leave an Anonymous Message</h3>
+    <textarea id="comment-input" rows="4" style="width: 100%; padding: 1rem; border-radius: 10px; border: 1px solid #ccc;" placeholder="Write your comment here..."></textarea>
+    <button onclick="submitComment()" style="margin-top: 0.5rem; padding: 0.5rem 1rem; background-color: #333; color: white; border: none; border-radius: 5px;">Send</button>
+    <ul id="comment-list" style="list-style: none; padding-left: 0; margin-top: 2rem;"></ul>
+  </section>
+
+  <footer style="text-align: center; padding: 2rem 0;">
+    <p>© 2025 Scriptum Cordis, Solum Caelis — Written by <em>Lumen Obscura</em></p>
+  </footer>
+
+  <!-- Falling Stars Script -->
+  <script>
+    const canvas = document.getElementById('stars-canvas');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function createStar() {
+      return {
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 1.2 + 0.5,
+        speed: Math.random() * 0.5 + 0.2,
+        opacity: Math.random() * 0.5 + 0.3
+      };
+    }
+
+    for (let i = 0; i < 120; i++) {
+      stars.push(createStar());
+    }
+
+    function animateStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < stars.length; i++) {
+        const s = stars[i];
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${s.opacity})`;
+        ctx.fill();
+        s.y += s.speed;
+        s.x -= s.speed * 0.3;
+
+        if (s.y > canvas.height || s.x < 0) {
+          stars[i] = createStar();
+          stars[i].y = 0;
+        }
+      }
+      requestAnimationFrame(animateStars);
+    }
+
+    animateStars();
+  </script>
+
+  <!-- Time Spent -->
+  <script>
+    let startTime = Date.now();
+    function formatDuration(ms) {
+      const sec = Math.floor(ms / 1000);
+      const min = Math.floor(sec / 60);
+      const hr = Math.floor(min / 60);
+      const s = sec % 60;
+      const m = min % 60;
+      const h = hr;
+
+      const hourText = h > 0 ? `${h} hour${h !== 1 ? 's' : ''}` : '';
+      const minuteText = m > 0 ? `${m} minute${m !== 1 ? 's' : ''}` : '';
+      const secondText = `${s} second${s !== 1 ? 's' : ''}`;
+
+      if (h > 0) return `${hourText}, ${minuteText}, and ${secondText}`;
+      else if (m > 0) return `${minuteText} and ${secondText}`;
+      return secondText;
+    }
+
+    function updateTimeSpent() {
+      const now = Date.now();
+      const duration = now - startTime;
+      document.getElementById("time-spent-display").textContent =
+        `⏱ Thank you so much, for you have spent your time with me for ${formatDuration(duration)}.`;
+    }
+    setInterval(updateTimeSpent, 1000);
+  </script>
+
+  <!-- Firebase Komentar -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBHqo9Zel_GOYdhw8GVphn-lfpSOO4KtYY",
+      authDomain: "scriptum-cordis-comments.firebaseapp.com",
+      databaseURL: "https://scriptum-cordis-comments-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "scriptum-cordis-comments",
+      storageBucket: "scriptum-cordis-comments.appspot.com",
+      messagingSenderId: "285720317062",
+      appId: "1:285720317062:web:8dcfe1c17d60685aee1507"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const commentsRef = ref(db, "comments_karya2");
+
+    window.submitComment = function () {
+      const comment = document.getElementById("comment-input").value.trim();
+      if (comment === "") return;
+      const now = new Date();
+      const time = now.toLocaleTimeString('en-US', { hour12: false });
+      const date = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+      push(commentsRef, {
+        text: comment,
+        timestamp: `${time} — ${date}`
+      });
+      document.getElementById("comment-input").value = "";
+    };
+
+    const list = document.getElementById("comment-list");
+    onChildAdded(commentsRef, (data) => {
+      const item = document.createElement("li");
+      item.innerHTML = `<strong>${data.val().timestamp}</strong><br>${data.val().text}`;
+      list.prepend(item);
+    });
+  </script>
+
+  <!-- Musik -->
+  <audio id="player" autoplay hidden></audio>
+  <div id="music-controls">
+    <button id="toggle-mute">🔊</button>
+    <span id="now-playing"></span>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const playlist = [
+        "take_you_there_x_no_bs.mp3",
+        "love_you_too_much.mp3",
+        "skip_this_part.mp3",
+        "unmistakable.mp3",
+        "i_have_nothing.mp3",
+        "on_my_way.mp3",
+        "rahasia_hati.mp3",
+        "cool_enough_for_you.mp3",
+        "saturn_x_slow_dancing.mp3",
+        "make_you_mine.mp3",
+        "love_me.mp3",
+        "limbo.mp3"
+      ];
+
+      function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
+
+      const player = document.getElementById("player");
+      const nowPlaying = document.getElementById("now-playing");
+      const toggleMute = document.getElementById("toggle-mute");
+
+      let shuffled = shuffle([...playlist]);
+      let current = 0;
+
+      function formatTrackName(filename) {
+        return filename
+          .replace(".mp3", "")
+          .replace(/_/g, " ")
+          .replace(/\b\w/g, l => l.toUpperCase());
+      }
+
+      function playNext() {
+        const track = shuffled[current];
+        player.src = track;
+        player.volume = 0.25;
+        nowPlaying.textContent = "Now Playing: " + formatTrackName(track);
+        player.play().catch(err => console.log("Gagal autoplay:", err));
+      }
+
+      player.addEventListener("ended", () => {
+        current = (current + 1) % shuffled.length;
+        playNext();
+      });
+
+      toggleMute.addEventListener("click", () => {
+        player.muted = !player.muted;
+        toggleMute.textContent = player.muted ? "🔇" : "🔊";
+      });
+
+      document.body.addEventListener("click", function firstClick() {
+        player.play().catch(() => {});
+        document.body.removeEventListener("click", firstClick);
+      });
+
+      playNext();
+    });
+  </script>
+</body>
+</html>
 
